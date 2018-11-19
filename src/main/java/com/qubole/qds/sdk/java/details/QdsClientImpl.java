@@ -17,13 +17,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import com.qubole.qds.sdk.java.api.ClusterApi;
-import com.qubole.qds.sdk.java.api.CommandApi;
-import com.qubole.qds.sdk.java.api.DbTapApi;
-import com.qubole.qds.sdk.java.api.HiveMetadataApi;
-import com.qubole.qds.sdk.java.api.NotebookAPI;
-import com.qubole.qds.sdk.java.api.ReportApi;
-import com.qubole.qds.sdk.java.api.SchedulerApi;
+import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
@@ -51,6 +45,7 @@ public class QdsClientImpl implements QdsClient
     private final Client client;
     private final AtomicBoolean isClosed = new AtomicBoolean(false);
     private final WebTarget target;
+    private final AccountApiImpl accountApi;
     private final CommandApiImpl commandApi;
     private final ClusterApiImpl clusterApi;
     private final HiveMetadataApiImpl hiveMetadataApi;
@@ -72,6 +67,7 @@ public class QdsClientImpl implements QdsClient
         this.configuration = Preconditions.checkNotNull(configuration, "configuration cannot be null");
         client = configuration.newClient();
         target = client.target(configuration.getApiEndpoint()).path(configuration.getApiVersion());
+        accountApi = new AccountApiImpl(this);
         commandApi = new CommandApiImpl(this);
         clusterApi = new ClusterApiImpl(this);
         hiveMetadataApi = new HiveMetadataApiImpl(this);
@@ -88,6 +84,11 @@ public class QdsClientImpl implements QdsClient
         SubCommandsDeserializer ccDeserializer = new SubCommandsDeserializer();
         module.addDeserializer(SubCommands.class, ccDeserializer);
         MAPPER.registerModule(module);
+    }
+
+    @Override
+    public AccountApi account() {
+        return accountApi;
     }
 
     @Override

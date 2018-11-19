@@ -31,13 +31,20 @@ public class Account
     private boolean compute_validated;
     private String name;
     private int id;
-    private String storage_location;
+    private String defloc;
+    private String level;
+    private String aws_region;
+    private String aws_AZ;
+    private int idle_session_timeout;
+    private int idle_account_timeout;
+    private boolean sub_account_creation;
+    private int cacheQuotaSize;
 
     public Account()
     {
     }
 
-    public Account(String authorized_ssh_key, String storage_type, String compute_type, String storage_secret_key, String compute_secret_key, String storage_access_key, String compute_access_key, boolean storage_validated, boolean compute_validated, String name, int id, String storage_location)
+    public Account(String authorized_ssh_key, String storage_type, String compute_type, String storage_secret_key, String compute_secret_key, String storage_access_key, String compute_access_key, boolean storage_validated, boolean compute_validated, String name, int id, String defloc, String level, String aws_region, String aws_AZ, int idle_cluster_timeout, int idle_session_timeout, boolean sub_account_creation, int cacheQuotaSize)
     {
         this.authorized_ssh_key = authorized_ssh_key;
         this.storage_type = storage_type;
@@ -50,7 +57,14 @@ public class Account
         this.compute_validated = compute_validated;
         this.name = name;
         this.id = id;
-        this.storage_location = storage_location;
+        this.defloc = defloc;
+        this.level = level;
+        this.aws_region = aws_region;
+        this.aws_AZ = aws_AZ;
+        this.idle_session_timeout = idle_account_timeout;
+        this.idle_session_timeout = idle_session_timeout;
+        this.sub_account_creation = sub_account_creation;
+        this.cacheQuotaSize = cacheQuotaSize;
     }
 
     public String getAuthorized_ssh_key()
@@ -163,14 +177,70 @@ public class Account
         this.id = id;
     }
 
-    public String getStorage_location()
+    public String getDefloc()
     {
-        return storage_location;
+        return defloc;
     }
 
-    public void setStorage_location(String storage_location)
+    public void setDefloc(String defloc)
     {
-        this.storage_location = storage_location;
+        this.defloc = defloc;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getAws_region() {
+        return aws_region;
+    }
+
+    public void setAws_region(String aws_region) {
+        this.aws_region = aws_region;
+    }
+
+    public String getAws_AZ() {
+        return aws_AZ;
+    }
+
+    public void setAws_AZ(String aws_AZ) {
+        this.aws_AZ = aws_AZ;
+    }
+
+    public int getIdle_session_timeout() {
+        return idle_session_timeout;
+    }
+
+    public void setIdle_session_timeout(int idle_session_timeout) {
+        this.idle_session_timeout = idle_session_timeout;
+    }
+
+    public int getIdle_account_timeout() {
+        return idle_account_timeout;
+    }
+
+    public void setIdle_account_timeout(int idle_account_timeout) {
+        this.idle_account_timeout = idle_account_timeout;
+    }
+
+    public boolean sub_account_creation() {
+        return sub_account_creation;
+    }
+
+    public void setSub_account_creation(boolean sub_account_creation) {
+        this.sub_account_creation = sub_account_creation;
+    }
+
+    public int getCacheQuotaSize() {
+        return cacheQuotaSize;
+    }
+
+    public void setCacheQuotaSize(int cacheQuotaSize) {
+        this.cacheQuotaSize = cacheQuotaSize;
     }
 }
 
